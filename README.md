@@ -29,7 +29,7 @@ As a police officer:
 
 ## Your Mission
 
-Create the React application that satisfies all must-have requirements above, plus any nice-to-have requirements you wish to include.
+Create the React application that satisfies all product and tech requirements.
 
 For that, you’ll need to make requests to a publicly-available [API](https://bikeindex.org/documentation/api_v3) to get JSON content and print it on view. 
 
@@ -51,7 +51,7 @@ Host the website on the service of your choice (zeit, Heroku, AWS, GCloud, ...)
 - React
 - Tests: Jest
 - Code Linter
-- Typescript
+- Typescript 
 - CSSinJS is a plus: styled-components, styled-system, ...
 
 ## Instructions
