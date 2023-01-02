@@ -11,7 +11,7 @@ This app needs to display the list of reported bike thefts based on the Bikeinde
 
 As a police officer:
 
-- [ ] I want to see a list of reported bike thefts for the Berlin area.
+- [ ] I want to see a list of reported bike thefts for the Munich area.
 - [ ] I want to see the first 10 bike theft cases, with the ability to - paginate (10 cases per page).
 - [ ] I want to see a total number of bike theft cases.
 - [ ] For each reported bike theft I want to see:
@@ -37,7 +37,7 @@ The API is known to have some limitations. If you are not able to implement a pa
 
 For the layout of each page you can take inspiration from these resources:
 
-- [BikeIndex](https://bikeindex.org/bikes?serial=&button=&location=Berlin&distance=100&stolenness=proximity)
+- [BikeIndex](https://bikeindex.org/bikes?serial=&button=&location=Munich&distance=100&stolenness=proximity)
 - [BikeWise](https://bikewise.org)
 
 You can use any boilerplate/approach you prefer (nextjs, create react app, ...), but try to keep it simple. We encourage you to use your favorite tools and packages to build a solid React application.
