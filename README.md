@@ -1,5 +1,5 @@
 # Stolen Bike Index - Carly Coding Challenge
-![JOIN Stolen Bike Cases](https://github.com/join-com/coding-challenge-frontend-react/raw/master/illustration.png)
+![JOIN Stolen Bike Cases](./illustration.png)
 
 ## Context
 
