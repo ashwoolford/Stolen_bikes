@@ -1,5 +1,5 @@
 # Stolen Bike Index - Carly Coding Challenge
-![JOIN Stolen Bike Cases](./illustration.png)
+![Stolen Bike Cases](./illustration.png)
 
 ## Context
 
