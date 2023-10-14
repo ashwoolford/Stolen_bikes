@@ -3,7 +3,7 @@
 
 ## Live Demo
 
-[https://coding-challenge-fmb5coiwd-ashwoolford.vercel.app/](https://coding-challenge-fmb5coiwd-ashwoolford.vercel.app/).
+[https://coding-challenge-ashwoolford.vercel.app/](https://coding-challenge-ashwoolford.vercel.app/).
 
 ## Context
 
