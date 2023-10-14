@@ -32,23 +32,6 @@ module.exports = {
             "never"
         ],
         "eol-last": "error",
-        "import/order": [
-            "warn",
-            {
-                alphabetize: {
-                    caseInsensitive: true,
-                    order: "asc"
-                },
-                groups: [
-                    "builtin",
-                    "external",
-                    "index",
-                    "sibling",
-                    "parent",
-                    "internal"
-                ]
-            }
-        ],
         "jsx-quotes": [
             "warn",
             "prefer-double"
@@ -90,26 +73,9 @@ module.exports = {
             }
         ],
         "no-unused-vars": "warn",
-        "object-curly-spacing": [
-            "warn",
-            "always"
-        ],
         quotes: [
             "warn",
             "single"
-        ],
-        "react/jsx-curly-spacing": [
-            "warn",
-            {
-                allowMultiline: true,
-                children: {
-                    when: "always"
-                },
-                spacing: {
-                    objectLiterals: "always"
-                },
-                when: "always"
-            }
         ],
         "react/jsx-filename-extension": [
             "error",
@@ -123,24 +89,7 @@ module.exports = {
             }
         ],
         "react/prop-types": "warn",
-        semi: "warn",
-        "sort-imports": [
-            "warn",
-            {
-                ignoreCase: false,
-                ignoreDeclarationSort: true,
-                ignoreMemberSort: false
-            }
-        ],
-        "sort-keys": [
-            "warn",
-            "asc",
-            {
-                caseSensitive: true,
-                minKeys: 2,
-                natural: false
-            }
-        ]
+        semi: "warn"
     },
     settings: {
         react: {
