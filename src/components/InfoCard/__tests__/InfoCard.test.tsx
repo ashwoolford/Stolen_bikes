@@ -10,7 +10,6 @@ describe('InfoCard.tsx', () => {
                     title=""
                     description=""
                     theftDate=""
-                    reportedDate=""
                     location=""
                 />);
             const containerElement = screen.getByTestId('root-info-card');
@@ -24,7 +23,6 @@ describe('InfoCard.tsx', () => {
                 title: 'test-title',
                 description: 'test-description',
                 theftDate: 'test-date',
-                reportedDate: '',
                 location: ''
             };
             render(

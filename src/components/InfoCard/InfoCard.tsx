@@ -1,25 +1,32 @@
 import React from 'react';
-import { CardContainer } from './InfoCard.styles';
+import {
+    CardContainer, 
+    Title, 
+    Description,
+    TheftDateAndLocation,
+    CardImage, 
+    CardTexts
+} from './InfoCard.styles';
 
-type Props = { 
-    title: string, 
-    description: string, 
-    theftDate: string, 
-    reportedDate: string, 
-    location: string, 
+type Props = {
+    title: string,
+    description: string,
+    theftDate: string,
+    location: string,
     image?: string | undefined
 };
 
-const InfoCard: React.FC<Props> = ({ title, description, theftDate, reportedDate, location, image }) => {
+const IMG_PLACE_HOLDER = 'https://placehold.co/350x250?text=Image+Not+Found';
+const InfoCard: React.FC<Props> = ({ title, description, theftDate, location, image }) => {
 
     return (
         <CardContainer data-testid="root-info-card">
-            <div>{title}</div>
-            <div>{description}</div>
-            <div>{theftDate}</div>
-            <div>{reportedDate}</div>
-            <div>{location}</div>
-            <div>{image}</div>
+            <CardImage src={image ? image : IMG_PLACE_HOLDER}/>
+            <CardTexts>
+                <Title>{title}</Title>
+                <Description>{description}</Description>
+                <TheftDateAndLocation>{`${theftDate} - ${location}`}</TheftDateAndLocation>
+            </CardTexts>
         </CardContainer>
     );
 };
