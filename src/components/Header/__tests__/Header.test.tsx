@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Header from '../Header';
 
-describe('Container.tsx', () => {
+describe('Header.tsx', () => {
     describe('Basic tests', () => {
         it('Should render the component', () => {
             render(<Header />);
