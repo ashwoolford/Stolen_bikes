@@ -7,7 +7,7 @@ import {
     CardImage, 
     CardTexts
 } from './InfoCard.styles';
-import { IMG_PLACE_HOLDER } from '../../constants/constants';
+import { IMG_PLACE_HOLDER } from '../../constants/appConstants';
 
 type Props = {
     title: string,

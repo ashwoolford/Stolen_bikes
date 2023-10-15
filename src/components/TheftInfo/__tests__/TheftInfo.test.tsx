@@ -1,18 +1,18 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import InfoCard from '../InfoCard';
+import TheftInfo from '../TheftInfo';
 
-describe('InfoCard.tsx', () => {
+describe('TheftInfo.tsx', () => {
     describe('Basic tests', () => {
         it('Should render the component', () => {
             render(
-                <InfoCard
+                <TheftInfo
                     title=""
                     description=""
                     theftDate=""
                     location=""
                 />);
-            const containerElement = screen.getByTestId('root-info-card');
+            const containerElement = screen.getByTestId('theft-info');
             expect(containerElement).toBeInTheDocument();
         });
     });
@@ -23,17 +23,20 @@ describe('InfoCard.tsx', () => {
                 title: 'test-title',
                 description: 'test-description',
                 theftDate: 'test-date',
-                location: 'test-location'
+                location: 'test-location',
+                year: 2020,
+                coordinates: [1,2]
             };
             render(
-                <InfoCard
+                <TheftInfo
                     {...mockProps}
                 />);
 
             expect(screen.getByText(mockProps.title)).toHaveTextContent(mockProps.title);
             expect(screen.getByText(mockProps.description)).toHaveTextContent(mockProps.description);
-            const theftDateLoc = `${mockProps.theftDate} - ${mockProps.location}`;
-            expect(screen.getByText(theftDateLoc)).toHaveTextContent(theftDateLoc);
+            expect(screen.getByText(mockProps.theftDate)).toHaveTextContent(mockProps.theftDate);
+            expect(screen.getByText(mockProps.location)).toHaveTextContent(mockProps.location);
+            expect(screen.getByText(mockProps.year)).toHaveTextContent(mockProps.year.toString());
         });
     });
 });
