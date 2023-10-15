@@ -27,7 +27,7 @@ function App() {
             <Route path="/" element={<Index />} />
             <Route path="details/:id" element={<Details />} />
           </Routes>
-          <Footer />
+          {/* <Footer /> */}
         </Container>
       </BrowserRouter>
     </QueryClientProvider>

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const CardContainer = styled.div`
     display: flex;
-    margin: 10px 15px;
+    margin: 20px 15px;
     box-sizing: border-box;
     border: none;
     border-radius: .25rem;
@@ -15,6 +15,7 @@ export const CardContainer = styled.div`
 export const CardImage = styled.img`
     height: 200px;
     width: 300px;
+    flex: 30%;
     overflow: hidden;
     object-fit: cover;
     @media (max-width: 576px) {
@@ -23,6 +24,7 @@ export const CardImage = styled.img`
 `;
 export const CardTexts = styled.div`
     display: flex;
+    flex: 70%;
     flex-direction: column;
 `;
 export const Title = styled.a`

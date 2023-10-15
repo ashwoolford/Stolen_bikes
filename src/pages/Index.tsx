@@ -1,52 +1,64 @@
 import React, { useEffect } from 'react';
+import { useSearchParams, useLocation } from 'react-router-dom';
+
 import SearchForm from '../components/SearchForm/SearchForm';
-import InfoCard from '../components/InfoCard/InfoCard';
 import Pagination from '../components/Pagination/Pagination';
 import Spinner from '../components/Spinner/Spinner';
 import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
+import StolenBikesList from '../components/StolenBikesList/StolenBikesList';
 
 import useQueryParams from '../hooks/useQueryParams';
 import useFetchStolenBikes from '../hooks/useFetchStolenBikes';
+import { serializeFormQuery, unixToDate, dateToUnix } from '../utils/utils';
 
 const Index: React.FC = () => {
+    const [, setSearchParams] = useSearchParams();
+    const location = useLocation();
+
+
     const queryParams = useQueryParams();
-    const query = queryParams.get('query');
-    const from = queryParams.get('from');
-    const to = queryParams.get('to');
-    const page = queryParams.get('page');
+    const queryParamsObj = {
+        query: queryParams.get('query') || '',
+        from: queryParams.get('from'),
+        to: queryParams.get('to'),
+        page: queryParams.get('page') || '1'
+    };
 
-    const { isLoading, refetch, error, data } = useFetchStolenBikes({query, from, to, page});
-
-
-    console.log(data);
+    const { isFetching, refetch, error, data } = useFetchStolenBikes(queryParamsObj);
 
     useEffect(() => {
-        console.log('Something has changed ', [query, from, to, page]);
+        refetch();
+    }, [location, refetch]);
 
-    }, [query, from, to, page]);
+    const onSubmit = (params: any) => {
+        const serialized = serializeFormQuery({
+            ...queryParamsObj,
+            ...params
+        });
 
-    const onSubmit = (queryParams: object) => {
-        console.log(queryParams);
+        if(serialized.from) serialized.from = dateToUnix(serialized.from);
+        if(serialized.to) serialized.to = dateToUnix(serialized.to);
+
+        setSearchParams(serialized);
     };
 
     const handlePageChange = (page: any) => {
-        console.log(page);
+        setSearchParams(serializeFormQuery({ ...queryParamsObj, page }));
     };
 
-    if (isLoading) return <Spinner />;
+    if (isFetching) return <Spinner />;
     if (error) return <ErrorBoundary />;
 
     return (
         <div>
-            <SearchForm onSubmit={onSubmit} />
-            <InfoCard
-                title="This is a Title"
-                description="Test description"
-                theftDate="2022-05-25"
-                location="Munich, 81669, DE"
-            />
+            <SearchForm
+                caseText={queryParamsObj.query}
+                from={queryParamsObj.from ? unixToDate(parseInt(queryParamsObj.from)) : undefined}
+                to={queryParamsObj.to ? unixToDate(parseInt(queryParamsObj.to)) : undefined}
+                onSubmit={onSubmit} />
+            <StolenBikesList bikes={data} />
             <Pagination
-                initialPage={0}
+                forcePage={parseInt(queryParamsObj.page)}
                 pageCount={10}
                 handlePageChange={handlePageChange}
             />
