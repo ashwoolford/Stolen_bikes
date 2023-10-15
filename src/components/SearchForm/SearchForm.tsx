@@ -1,9 +1,17 @@
 import React, { useState } from 'react';
 import { CaseInput, FromDate, ToDate, SearchFormContainer, SearchButton } from './SearchForm.styles';
 
-const SearchForm: React.FC = () => {
+type Props = {
+    onSubmit: Function
+}
+const SearchForm: React.FC<Props> = ({onSubmit }) => {
     const [fromDate, setFromDate] = useState();
     const [toDate, setToDate] = useState();
+    const [query, setQuery] = useState();
+
+    const handleQueryChange = (event: any) => {
+        setQuery(event.target.value);
+    };
 
     const handleFromDateChange = (date: any) => {
         setFromDate(date);
@@ -13,10 +21,19 @@ const SearchForm: React.FC = () => {
         setToDate(date);
     };
 
+    const handleOnSubmit = () => {
+        onSubmit({
+            from: fromDate,
+            to: toDate,
+            query
+        });
+    };
+
     return (
         <SearchFormContainer>
             <CaseInput
                 placeholder="Case title"
+                onChange={handleQueryChange}
             />
 
             <FromDate placeholder={'From'}
@@ -28,7 +45,7 @@ const SearchForm: React.FC = () => {
                 maxDate={new Date()}
                 onChange={handleToDateChange} />
 
-            <SearchButton>Search</SearchButton>
+            <SearchButton onClick={handleOnSubmit}>Search</SearchButton>
             
         </SearchFormContainer>
     );

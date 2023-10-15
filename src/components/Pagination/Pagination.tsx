@@ -2,11 +2,13 @@ import React from 'react';
 import ReactPaginate from 'react-paginate';
 import { PaginationContainer } from './Pagination.styles';
 
+type Props = {
+    initialPage: number,
+    pageCount: number,
+    handlePageChange: (selected: any) => void
+};
 
-const Pagination: React.FC = () => {
-    const handlePageChange = (event: any) => {
-        console.log(event);
-    };
+const Pagination: React.FC<Props> = ({ initialPage, pageCount, handlePageChange }) => {
 
     return (
         <PaginationContainer>
@@ -14,9 +16,9 @@ const Pagination: React.FC = () => {
                 breakLabel="..."
                 nextLabel="next >"
                 onPageChange={handlePageChange}
-                pageRangeDisplayed={1}
-                pageCount={100}
-                initialPage={0}
+                pageRangeDisplayed={5}
+                pageCount={pageCount}
+                initialPage={initialPage}
                 previousLabel="< previous"
                 renderOnZeroPageCount={null}
                 containerClassName="pagination"
