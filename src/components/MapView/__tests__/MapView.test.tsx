@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import MapView from '../MapView';
 
-describe('TheftInfo.tsx', () => {
+describe('MapView.tsx', () => {
     describe('Basic tests', () => {
         it('Should render the component', () => {
             render(
