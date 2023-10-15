@@ -1,5 +1,6 @@
 import React from 'react';
 import InfoCard from '../InfoCard/InfoCard';
+import { unixToDate } from '../../utils/utils';
 
 type Props = {
     bikes: any
@@ -12,7 +13,7 @@ const StolenBikesList: React.FC<Props> = ({ bikes }) => {
             key={bike.id}
             title={bike.title}
             description={bike.description}
-            theftDate={bike.date_stolen}
+            theftDate={unixToDate(bike.date_stolen).toDateString()}
             location={bike.stolen_location}
             image={bike.thumb}
         />

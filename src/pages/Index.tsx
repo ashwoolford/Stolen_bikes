@@ -6,9 +6,11 @@ import Pagination from '../components/Pagination/Pagination';
 import Spinner from '../components/Spinner/Spinner';
 import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
 import StolenBikesList from '../components/StolenBikesList/StolenBikesList';
+import Count from '../components/Count/Count';
 
 import useQueryParams from '../hooks/useQueryParams';
 import useFetchStolenBikes from '../hooks/useFetchStolenBikes';
+import useFetchCount from '../hooks/useFetchCount';
 import { serializeFormQuery, unixToDate, dateToUnix } from '../utils/utils';
 
 const Index: React.FC = () => {
@@ -25,10 +27,17 @@ const Index: React.FC = () => {
     };
 
     const { isFetching, refetch, error, data } = useFetchStolenBikes(queryParamsObj);
+    const {
+        isFetching: isCountFetching,
+        refetch: countRefetch,
+        error: countError,
+        data: countData
+    } = useFetchCount(queryParamsObj);
 
     useEffect(() => {
         refetch();
-    }, [location, refetch]);
+        countRefetch();
+    }, [location, refetch, countRefetch]);
 
     const onSubmit = (params: any) => {
         const serialized = serializeFormQuery({
@@ -36,8 +45,8 @@ const Index: React.FC = () => {
             ...params
         });
 
-        if(serialized.from) serialized.from = dateToUnix(serialized.from);
-        if(serialized.to) serialized.to = dateToUnix(serialized.to);
+        if (serialized.from) serialized.from = dateToUnix(serialized.from);
+        if (serialized.to) serialized.to = dateToUnix(serialized.to);
 
         setSearchParams(serialized);
     };
@@ -46,8 +55,8 @@ const Index: React.FC = () => {
         setSearchParams(serializeFormQuery({ ...queryParamsObj, page }));
     };
 
-    if (isFetching) return <Spinner />;
-    if (error) return <ErrorBoundary />;
+    if (isFetching || isCountFetching) return <Spinner />;
+    if (error || countError) return <ErrorBoundary />;
 
     return (
         <div>
@@ -56,10 +65,15 @@ const Index: React.FC = () => {
                 from={queryParamsObj.from ? unixToDate(parseInt(queryParamsObj.from)) : undefined}
                 to={queryParamsObj.to ? unixToDate(parseInt(queryParamsObj.to)) : undefined}
                 onSubmit={onSubmit} />
+            <Count
+                isFetching={isCountFetching}
+                error={countError}
+                count={countData}
+            />
             <StolenBikesList bikes={data} />
             <Pagination
                 forcePage={parseInt(queryParamsObj.page)}
-                pageCount={10}
+                pageCount={Math.ceil(countData/10)}
                 handlePageChange={handlePageChange}
             />
         </div>
