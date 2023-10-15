@@ -7,6 +7,9 @@ export const SearchFormContainer = styled.div`
     align-items: center;
     flex-wrap: wrap;
     justify-content: center;
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
 `;
 export const CaseInput = styled(Input)`
     margin: 0 12px 0 12px;

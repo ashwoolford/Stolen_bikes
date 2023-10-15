@@ -7,6 +7,7 @@ import {
     CardImage, 
     CardTexts
 } from './InfoCard.styles';
+import { IMG_PLACE_HOLDER } from '../../constants/constants';
 
 type Props = {
     title: string,
@@ -16,7 +17,6 @@ type Props = {
     image?: string | undefined
 };
 
-const IMG_PLACE_HOLDER = 'https://placehold.co/350x250?text=Image+Not+Found';
 const InfoCard: React.FC<Props> = ({ title, description, theftDate, location, image }) => {
 
     return (
