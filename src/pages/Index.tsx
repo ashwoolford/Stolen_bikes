@@ -6,6 +6,7 @@ import Spinner from '../components/Spinner/Spinner';
 import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
 
 import useQueryParams from '../hooks/useQueryParams';
+import useFetchStolenBikes from '../hooks/useFetchStolenBikes';
 
 const Index: React.FC = () => {
     const queryParams = useQueryParams();
@@ -14,6 +15,10 @@ const Index: React.FC = () => {
     const to = queryParams.get('to');
     const page = queryParams.get('page');
 
+    const { isLoading, refetch, error, data } = useFetchStolenBikes({query, from, to, page});
+
+
+    console.log(data);
 
     useEffect(() => {
         console.log('Something has changed ', [query, from, to, page]);
@@ -27,6 +32,9 @@ const Index: React.FC = () => {
     const handlePageChange = (page: any) => {
         console.log(page);
     };
+
+    if (isLoading) return <Spinner />;
+    if (error) return <ErrorBoundary />;
 
     return (
         <div>

@@ -1,0 +1,31 @@
+import {
+    useQuery
+} from '@tanstack/react-query';
+import API from '../services/API';
+//import { transformLiveStatusData } from "../services/CarParkService";
+
+const api = new API();
+
+const useFetchStolenBikes = (queryParams: any) => {
+    //Utils function query builder
+    const page = queryParams.page ? `&page=${queryParams.page}` : '';
+    const query = queryParams.query ? `&query=${queryParams.query}` : '';
+    const from = queryParams.from ? `&stolen_after=${queryParams.from}` : '';
+    const to = queryParams.to ? `&stolen_before=${queryParams.to}` : '';
+
+    const url = `/bikes_search/stolen?proximity=Munich&per_page=10${page}${query}${from}${to}`;
+    console.log('url', url);
+
+    return useQuery(
+        {
+            queryKey: ['stolen-bike-data'],
+            queryFn: () => api.get(url).then(({ data }) => {
+                // const transformedData = transformLiveStatusData(data);
+                // return transformedData;
+                return data.bikes;
+            })
+        }
+    );
+};
+
+export default useFetchStolenBikes;
