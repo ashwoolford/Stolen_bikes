@@ -26,27 +26,36 @@ const Index: React.FC = () => {
         page: queryParams.get('page') || '1'
     };
 
-    const { isFetching, refetch, error, data } = useFetchStolenBikes(queryParamsObj);
+    const { 
+        isLoading: isLoadingStolenBikes, 
+        isFetching: isFetchingStolenBikes, 
+        refetch: refetchStolenBikes, 
+        error: errorStolenBikes, 
+        data: stolenBikesData 
+    } = useFetchStolenBikes(queryParamsObj);
+
     const {
-        isFetching: isCountFetching,
-        refetch: countRefetch,
-        error: countError,
+        isLoading: isLoadingCount,
+        isFetching: isFetchingCount,
+        refetch: refetchCount,
+        error: errorCount,
         data: countData
     } = useFetchCount(queryParamsObj);
 
     useEffect(() => {
-        refetch();
-        countRefetch();
-    }, [location, refetch, countRefetch]);
+        refetchStolenBikes();
+        refetchCount();
+    }, [location, refetchStolenBikes, refetchCount]);
 
     const onSubmit = (params: any) => {
         const serialized = serializeFormQuery({
             ...queryParamsObj,
-            ...params
+            ...params,
+            page: 1
         });
-
-        if (serialized.from) serialized.from = dateToUnix(serialized.from);
-        if (serialized.to) serialized.to = dateToUnix(serialized.to);
+        
+        serialized.from &&= dateToUnix(serialized.from);
+        serialized.to &&= dateToUnix(serialized.to);
 
         setSearchParams(serialized);
     };
@@ -55,8 +64,8 @@ const Index: React.FC = () => {
         setSearchParams(serializeFormQuery({ ...queryParamsObj, page }));
     };
 
-    if (isFetching || isCountFetching) return <Spinner />;
-    if (error || countError) return <ErrorBoundary />;
+    if (isLoadingStolenBikes || isLoadingCount || isFetchingStolenBikes || isFetchingCount) return <Spinner />;
+    if (errorStolenBikes || errorCount) return <ErrorBoundary />;
 
     return (
         <div>
@@ -66,11 +75,9 @@ const Index: React.FC = () => {
                 to={queryParamsObj.to ? unixToDate(parseInt(queryParamsObj.to)) : undefined}
                 onSubmit={onSubmit} />
             <Count
-                isFetching={isCountFetching}
-                error={countError}
                 count={countData}
             />
-            <StolenBikesList bikes={data} />
+            <StolenBikesList bikes={stolenBikesData} />
             <Pagination
                 forcePage={parseInt(queryParamsObj.page)}
                 pageCount={Math.ceil(countData/10)}

@@ -22,7 +22,9 @@ const useFetchStolenBikes = (queryParams: any) => {
                 // const transformedData = transformLiveStatusData(data);
                 // return transformedData;
                 return data.bikes;
-            })
+            }),
+            refetchOnWindowFocus: false,
+            enabled: false
         }
     );
 };

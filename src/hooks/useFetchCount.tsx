@@ -21,7 +21,9 @@ const useFetchCount = (queryParams: any) => {
                 // const transformedData = transformLiveStatusData(data);
                 // return transformedData;
                 return data.proximity;
-            })
+            }),
+            refetchOnWindowFocus: false,
+            enabled: false
         }
     );
 };
