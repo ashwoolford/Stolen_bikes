@@ -2,7 +2,6 @@ import {
     useQuery
 } from '@tanstack/react-query';
 import API from '../services/API';
-//import { transformLiveStatusData } from "../services/CarParkService";
 
 const api = new API();
 
@@ -18,8 +17,6 @@ const useFetchCount = (queryParams: any) => {
         {
             queryKey: ['count-bike-data'],
             queryFn: () => api.get(url).then(({ data }) => {
-                // const transformedData = transformLiveStatusData(data);
-                // return transformedData;
                 return data.proximity;
             }),
             refetchOnWindowFocus: false,

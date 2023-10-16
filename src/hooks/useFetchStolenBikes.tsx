@@ -2,7 +2,6 @@ import {
     useQuery
 } from '@tanstack/react-query';
 import API from '../services/API';
-//import { transformLiveStatusData } from "../services/CarParkService";
 
 const api = new API();
 
@@ -19,8 +18,6 @@ const useFetchStolenBikes = (queryParams: any) => {
         {
             queryKey: ['stolen-bike-data'],
             queryFn: () => api.get(url).then(({ data }) => {
-                // const transformedData = transformLiveStatusData(data);
-                // return transformedData;
                 return data.bikes;
             }),
             refetchOnWindowFocus: false,
