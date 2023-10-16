@@ -1,12 +1,15 @@
 import React from 'react';
 import InfoCard from '../InfoCard/InfoCard';
 import { unixToDate } from '../../utils/utils';
+import Empty from '../Empty/Empty';
 
 type Props = {
     bikes: any
 };
 
 const StolenBikesList: React.FC<Props> = ({ bikes }) => {
+
+    if(!bikes.length) return <Empty />;
 
     return bikes.map((bike: any) => (
         <InfoCard
