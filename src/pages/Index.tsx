@@ -60,7 +60,7 @@ const Index: React.FC = () => {
         setSearchParams(serialized);
     };
 
-    const handlePageChange = (page: any) => {
+    const handlePageChange = (page: number) => {
         setSearchParams(serializeFormQuery({ ...queryParamsObj, page }));
     };
 
