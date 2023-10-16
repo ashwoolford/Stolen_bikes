@@ -5,7 +5,7 @@ import { PaginationContainer } from './Pagination.styles';
 type Props = {
     forcePage: number,
     pageCount: number,
-    handlePageChange: (selected: any) => void
+    handlePageChange: Function
 };
 
 const Pagination: React.FC<Props> = ({ forcePage, pageCount, handlePageChange }) => {
