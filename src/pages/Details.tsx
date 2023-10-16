@@ -1,19 +1,30 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
+
 import TheftInfo from '../components/TheftInfo/TheftInfo';
 import MapView from '../components/MapView/MapView';
+import Spinner from '../components/Spinner/Spinner';
+import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
+
+import useFetchBikeDetails from '../hooks/useFetchBikeDetails';
+import { unixToDate } from '../utils/utils';
 
 const Details: React.FC = () => {
+    let { id } = useParams();
+    const { isLoading, error, data } = useFetchBikeDetails(id||'');
 
+    if (isLoading) return <Spinner />;
+    if (error) return <ErrorBoundary />;
     return (
         <div>
             <TheftInfo
-                title="2019 Infinity Cycle Works"
-                description="It’s a 24 inch bike, it has two different grips, a flashlight in the front and the back."
-                theftDate="Yesterday 10:39pm"
-                location="Munich"
-                year={2020}
+                title={data.title}
+                description={data.description}
+                theftDate={unixToDate(data.date_stolen).toDateString()}
+                location={data.stolen_location}
+                year={data.year}
             />
-            <MapView coordinates={[51.505, -0.09]} />
+            <MapView coordinates={data.stolen_coordinates} />
         </div>
     );
 };

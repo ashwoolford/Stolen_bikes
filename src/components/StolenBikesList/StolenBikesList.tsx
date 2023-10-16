@@ -11,6 +11,7 @@ const StolenBikesList: React.FC<Props> = ({ bikes }) => {
     return bikes.map((bike: any) => (
         <InfoCard
             key={bike.id}
+            id={bike.id.toString()}
             title={bike.title}
             description={bike.description}
             theftDate={unixToDate(bike.date_stolen).toDateString()}

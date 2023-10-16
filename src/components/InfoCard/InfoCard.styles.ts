@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const CardContainer = styled.div`
     display: flex;
@@ -27,10 +28,11 @@ export const CardTexts = styled.div`
     flex: 70%;
     flex-direction: column;
 `;
-export const Title = styled.a`
+export const Title = styled(Link)`
     font-size: 1.6rem;
     font-weight: 500;  
     margin: 10px;
+    color: #000;
     text-transform: uppercase;
 `;
 export const Description = styled.span`

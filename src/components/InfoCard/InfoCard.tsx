@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {
     CardContainer, 
     Title, 
@@ -10,6 +11,7 @@ import {
 import { IMG_PLACE_HOLDER } from '../../constants/appConstants';
 
 type Props = {
+    id: string;
     title: string,
     description: string,
     theftDate: string,
@@ -17,13 +19,13 @@ type Props = {
     image?: string | undefined
 };
 
-const InfoCard: React.FC<Props> = ({ title, description, theftDate, location, image }) => {
+const InfoCard: React.FC<Props> = ({ id, title, description, theftDate, location, image }) => {
 
     return (
         <CardContainer data-testid="root-info-card">
             <CardImage src={image ? image : IMG_PLACE_HOLDER}/>
             <CardTexts>
-                <Title>{title}</Title>
+                <Title to={`details/${id}`}>{title}</Title>
                 <Description>{description}</Description>
                 <TheftDateAndLocation>{`${theftDate} - ${location}`}</TheftDateAndLocation>
             </CardTexts>
