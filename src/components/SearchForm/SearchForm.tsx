@@ -12,15 +12,15 @@ const SearchForm: React.FC<Props> = ({caseText, from, to, onSubmit }) => {
     const [toDate, setToDate] = useState(to);
     const [query, setQuery] = useState(caseText);
 
-    const handleQueryChange = (event: any) => {
+    const handleQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setQuery(event.target.value);
     };
 
-    const handleFromDateChange = (date: any) => {
+    const handleFromDateChange = (date: Date) => {
         setFromDate(date);
     };
 
-    const handleToDateChange = (date: any) => {
+    const handleToDateChange = (date: Date) => {
         setToDate(date);
     };
 
